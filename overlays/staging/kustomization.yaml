@@ -1,5 +1,14 @@
 resources:
-- ../../base
+  - ../../base
 
 patchesStrategicMerge:
-- patch.yaml
+  - patch.yaml
+
+configMapGenerator:
+  - name: app-config
+    literals:
+      - ENVIRONMENT=staging
+      - LOG_LEVEL=debug
+
+generatorOptions:
+  disableNameSuffixHash: true
