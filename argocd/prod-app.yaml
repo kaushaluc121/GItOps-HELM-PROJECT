@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: myapp-prod
+  namespace: argocd
+
+spec:
+  project: gitops-project
+
+  source:
+    repoURL: https://github.com/kaushaluc121/GItOps-HELM-PROJECT.git
+    targetRevision: main
+    path: overlays/prod
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
